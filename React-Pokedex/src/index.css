@@ -1,0 +1,494 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  background-color: #d1d5db;
+}
+
+/* Navbar stylings */
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  height: 50px;
+  background-color: #f7475c;
+  color: white;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+}
+
+.nav-bar > img {
+  margin-right: 5px;
+  max-width: 40px;
+  filter: invert(95%);
+}
+
+.nav-bar > h1 {
+  margin-right: auto;
+  font-size: 1.25rem;
+}
+
+input {
+  border-radius: 5px;
+  border: 1px solid #d5d4d8;
+  padding: 10px;
+  margin-right: 1.5rem;
+}
+
+/* Main content stylings */
+.poke-container {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.poke-btn {
+  margin: 10px;
+  width: 500px;
+  height: 300px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #f3f4f6;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+  transform: perspective(2px) translateZ(0);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.poke-btn:hover,
+.poke-btn:focus,
+.poke-btn:active {
+  animation-name: poke-shake;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: 2;
+  background-color: #ffdbde;
+}
+
+/* button contents */
+
+.poke-id {
+  margin: 0;
+  z-index: -1;
+  position: absolute;
+  font-size: 100px;
+  top: -10px;
+  left: 5px;
+  color: #d2d7dc;
+  font-weight: 700;
+}
+
+.poke-name {
+  text-transform: capitalize;
+  font-family: "Press Start 2P", cursive;
+  font-size: 22px;
+  opacity: 0.8;
+}
+
+.poke-sprite {
+  width: 100%;
+  max-width: 150px;
+}
+
+/* Poke-Buzz animation */
+@keyframes poke-shake {
+  10% {
+    transform: translateX(3px) rotate(2deg);
+  }
+  20% {
+    transform: translateX(-3px) rotate(-2deg);
+  }
+  30% {
+    transform: translateX(3px) rotate(2deg);
+  }
+  40% {
+    transform: translateX(-3px) rotate(-2deg);
+  }
+  50% {
+    transform: translateX(2px) rotate(1deg);
+  }
+  60% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  70% {
+    transform: translateX(2px) rotate(1deg);
+  }
+  80% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  90% {
+    transform: translateX(1px) rotate(0);
+  }
+  100% {
+    transform: translateX(-1px) rotate(0);
+  }
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.load-more-btn {
+  box-shadow: inset 0px 1px 0px 0px #f5978e;
+  background: linear-gradient(to bottom, #f7485c 5%, #c62d1f 100%);
+  border-radius: 6px;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 24px;
+  width: 200px;
+  padding: 20px 15px;
+  margin: 10px 30px;
+  border: none;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+}
+
+/* Modal Stylings */
+
+.modal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: visible;
+}
+
+.modal-content {
+  width: 80%;
+  height: 60%;
+  max-width: 500px;
+  max-height: 800px;
+  background-color: #f3f4f6;
+  transform: translateY(-200px);
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-bottom: 20px;
+  overflow: hidden;
+  position: absolute;
+}
+
+.modal.show .modal-content {
+  transform: translateY(0);
+}
+
+.modal-header {
+  text-align: center;
+  margin: 0 10px;
+}
+
+.modal-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+}
+
+.modal-close-btn {
+  margin-right: 5px;
+  padding: 3px 10px;
+  font-family: "Roboto Condensed", sans-serif;
+  background-color: darkgrey;
+  line-height: 20px;
+  font-weight: 700;
+  border: none;
+  color: white;
+  font-size: 14px;
+  display: inline-block;
+  border-radius: 3px;
+}
+
+.modal-close-btn:hover {
+  cursor: pointer;
+  background-color: #5a6268;
+}
+
+.modal-title {
+  margin: 0 5px;
+  text-transform: capitalize;
+  font-size: 28px;
+  text-align: center;
+  font-family: "Press Start 2P", cursive;
+  position: relative;
+  top: 10px;
+}
+
+.modal-body--poke-id {
+  z-index: -1;
+  font-size: 500px;
+  position: absolute;
+  left: 50%;
+  top: -20%;
+  transform: translateX(-50%);
+  color: #d2d7dc;
+  letter-spacing: -10px;
+  opacity: 0.3;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal-body--poke-img {
+  max-width: 800px;
+  width: 80%;
+}
+
+.modal > p {
+  margin: 0;
+  padding: 0;
+}
+
+.modal-info-box {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  padding: 0 10px;
+  margin-bottom: 15px;
+}
+
+.info-box-height-weight {
+  padding: 10px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.span-info-box {
+  font-weight: 700;
+}
+
+.info-box-height-weight > p {
+  margin: 0;
+}
+
+.modal-info-box--types > li {
+  margin: 5px;
+  padding: 4px 6px;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.badge-color {
+  font-size: 15px;
+  font-family: "Press Start 2P", cursive;
+  font-weight: bold;
+  text-align: center;
+  border: 0.1em solid transparent;
+  border-radius: 0.4em;
+}
+
+.badge-color > span {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: -0.5px;
+  color: white;
+  text-shadow: 0em 0em 0.2em black;
+}
+
+.fire {
+  background-color: #ef4e43;
+}
+
+.normal {
+  background-color: #a8a878;
+}
+
+.fighting {
+  background-color: #c03028;
+}
+
+.water {
+  background-color: #6890f0;
+}
+
+.poison {
+  background-color: #a040a0;
+}
+
+.electric {
+  background-color: #f8d030;
+}
+
+.ground {
+  background-color: #e0c068;
+}
+
+.grass {
+  background-color: #78c850;
+}
+
+.flying {
+  background-color: #a890f0;
+}
+
+.ice {
+  background-color: #98d8d8;
+}
+
+.bug {
+  background-color: #a8b820;
+}
+
+.psychic {
+  background-color: #f85888;
+}
+
+.rock {
+  background-color: #b8a038;
+}
+
+.dragon {
+  background-color: #7038f8;
+}
+
+.ghost {
+  background-color: #705898;
+}
+
+.dark {
+  background-color: #705848;
+}
+
+.steel {
+  background-color: #b8b8d0;
+}
+
+.fairy {
+  background-color: #ffb7fa;
+}
+
+/* media-queries because modal is very difficult to make 
+responsive due to way CSS works on custom modal
+definitely will use dependencies for modals in the future
+This is too many untargeted media queries */
+@media only screen and (max-height: 400px) {
+  .modal-body--poke-img {
+    width: 100%;
+    max-width: 250px;
+    margin-left: 60px;
+  }
+
+  .media-query-container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .modal-info-box {
+    margin: 0;
+    padding: 0;
+  }
+
+  .modal-content {
+    height: 80%;
+  }
+
+  .modal-body--poke-id {
+    font-size: 300px;
+    top: -10px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .modal-body--poke-id {
+    font-size: 200px;
+    top: 20px;
+  }
+}
+
+@media only screen and (max-height: 300px) {
+  .modal-body--poke-img {
+    width: 100%;
+    max-width: 150px;
+    margin-left: 60px;
+  }
+
+  .modal-body--poke-id {
+    top: -50px;
+  }
+}
+
+@media only screen and (max-width: 330px) {
+  .modal-title {
+    font-size: 23px;
+  }
+
+  input {
+    width: 125px;
+  }
+  /* nifty trick to wrap placeholder text */
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    white-space: pre-wrap;
+    position: relative;
+    top: -7px;
+    font-size: 12px;
+  }
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    white-space: pre-line;
+    position: relative;
+    top: -7px;
+  }
+}
+
+@media only screen and (min-device-width: 540px) and (max-device-width: 768px) {
+  .modal-body--poke-img {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media only screen and (min-device-width: 769px) and (max-device-width: 1024px) {
+  .modal-body--poke-img {
+    width: 100%;
+    max-width: 260px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .modal-body--poke-img {
+    width: 100%;
+    max-width: 400px;
+  }
+}
